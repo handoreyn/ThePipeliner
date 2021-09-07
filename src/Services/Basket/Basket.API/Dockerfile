@@ -9,7 +9,7 @@ RUN dotnet restore Basket.API.csproj
 RUN dotnet build Basket.API.csproj -c Release -o /build
 
 FROM build AS publish
-RUN dotnet publish Basket.Api.csproj -c Release -o /publish
+RUN dotnet publish Basket.API.csproj -c Release -o /publish
 
 FROM base AS final
 WORKDIR /app    

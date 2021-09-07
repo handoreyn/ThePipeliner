@@ -1,0 +1,10 @@
+services:
+  basket-api:
+    build: ./Services/Basket/Basket.API/
+    ports:
+      - "5050:80"
+  
+  catalog-api:
+    build: ./Services/Catalog/Catalog.API
+    ports:
+      - "5055:80"
