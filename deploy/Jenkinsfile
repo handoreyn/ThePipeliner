@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clean Workspace') {
+            steps {
+                echo 'Workspace Cleaning'
+                cleanWs(cleanWhenSuccess: true, cleanWhenNotBuild: true)
+            }
+        }
+
+        stage('Git Checkout') {
+            steps {
+                git(url: 'https://github.com/handoreyn/ThePipeliner', branch:'master', poll: true)
+            }
+        }
+
+        stage('Restore Packages') {
+            steps {
+                sh 'dotnet restore ../src/.'
+            }
+        }
+
+        stage('Build Projects') {
+            steps {
+                sh 'dotnet build ../src/.'
+            }
+        }
+
+        stage ('Run tests') {
+            steps {
+                sh 'dotnet test ../src/.'
+            }
+        }
+
+        stage ('Deploy') {
+            steps {
+                sh 'docker-compose up -f ../src/docker-compose.yml up --build -d'
+            }
+        }
+    }
+}
