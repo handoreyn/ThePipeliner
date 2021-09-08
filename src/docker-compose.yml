@@ -1,5 +1,5 @@
 services:
-  basket_api:
+  basket:
     container_name: "basket-api"
     restart: always
     build:
@@ -10,7 +10,7 @@ services:
     ports:
       - "5050:80"  
   
-  catalog_api:
+  catalog:
     container_name: "catalog-api"
     restart: always
     build:
@@ -20,3 +20,6 @@ services:
       - liner
     ports:
       - "5055:80"
+
+networks:
+  liner:
